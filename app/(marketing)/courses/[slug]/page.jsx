@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Button from "@/components/ui/Button";
+import { Gift } from "lucide-react";
 
 /* ── Course data ──────────────────────────────────────────────────────────── */
 const COURSE_DATA = {
@@ -571,8 +572,8 @@ export default async function CourseDetailPage({ params }) {
             Experience the teaching before you decide.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-            <Button href="/book" variant="gold" size="lg">
-              🎁 Book 3 Free Classes
+            <Button href="/book" variant="gold" size="lg" className="inline-flex items-center gap-2">
+              <Gift className="h-4 w-4" /> Book 3 Free Classes
             </Button>
             <Link
               href="/courses"

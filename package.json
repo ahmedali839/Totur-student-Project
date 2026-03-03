@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build",
+    "dev": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\" && next dev --webpack",
+    "build": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\" && next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
+    "lucide-react": "^0.576.0",
     "mongoose": "^9.2.3",
     "next": "16.1.6",
     "react": "19.2.3",

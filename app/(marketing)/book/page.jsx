@@ -1,5 +1,6 @@
 import CalEmbed from "@/components/ui/CalEmbed";
 import Button from "@/components/ui/Button";
+import { Target, BookOpen, Users, CalendarDays, ShieldCheck, Video, Zap } from "lucide-react";
 
 export const metadata = {
   title: "Book a Free Trial Lesson | Hafiza Sania — Quran & Arabic",
@@ -21,36 +22,36 @@ export const metadata = {
 /* ── Static content ───────────────────────────────────────────────────────── */
 const WHAT_HAPPENS = [
   {
-    icon: "🎯",
+    icon: <Target className="h-6 w-6 text-brand" />,
     text: "Hafiza Sania assesses your current level — comfortable, conversational, no pressure.",
   },
   {
-    icon: "📚",
+    icon: <BookOpen className="h-6 w-6 text-brand" />,
     text: "You see exactly how the course works and what the weekly structure feels like.",
   },
   {
-    icon: "👩‍🏫",
+    icon: <Users className="h-6 w-6 text-brand" />,
     text: "You meet Hafiza Sania and can ask any question about the course or her teaching style.",
   },
   {
-    icon: "📅",
+    icon: <CalendarDays className="h-6 w-6 text-brand" />,
     text: "If you'd like to continue, we set your recurring weekly schedule together.",
   },
 ];
 
 const TRUST_ITEMS = [
   {
-    icon: "✅",
+    icon: <ShieldCheck className="h-8 w-8 text-gold-mid" />,
     title: "Completely Free",
     body: "No credit card, no deposit. The first 3 trial classes are a gift — zero obligation.",
   },
   {
-    icon: "⏱",
+    icon: <Video className="h-8 w-8 text-brand-mid" />,
     title: "Live & 1-on-1",
     body: "A private Zoom session with Hafiza Sania — not a group class, not a sales call.",
   },
   {
-    icon: "📩",
+    icon: <Zap className="h-8 w-8 text-gold-light" />,
     title: "Instant Confirmation",
     body: "A Zoom link arrives in your inbox the moment you complete booking.",
   },
@@ -59,150 +60,137 @@ const TRUST_ITEMS = [
 /* ── Page ─────────────────────────────────────────────────────────────────── */
 export default function BookPage() {
   const rawLink = process.env.NEXT_PUBLIC_CAL_LINK ?? "hafiza-sania/free-trial";
-  // Cal embed expects a path like "username/event", not a full URL
   const calLink = rawLink.replace(/^https?:\/\/cal\.com\//, "");
 
   return (
-    <>
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="gradient-hero pattern-overlay relative overflow-hidden px-4 pb-14 pt-14 text-white">
-        <div
-          className="pointer-events-none absolute -right-16 -top-16 h-60 w-60 rounded-full bg-brand-mid/30 blur-3xl"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute -bottom-8 -left-8 h-48 w-48 rounded-full bg-brand-mid/20 blur-3xl"
-          aria-hidden="true"
-        />
+    <div className="bg-surface">
+      {/* ── PREMIUM LIGHT HERO ──────────────────────────────────────────── */}
+      <section className="relative overflow-hidden px-4 pb-16 pt-24 sm:pt-32">
+        {/* Soft background glows for a premium white layout */}
+        <div className="pointer-events-none absolute -right-20 -top-20 h-96 w-96 rounded-full bg-brand-faint/50 blur-3xl" aria-hidden="true" />
+        <div className="pointer-events-none absolute -bottom-10 -left-10 h-72 w-72 rounded-full bg-gold-faint/50 blur-3xl" aria-hidden="true" />
 
-        <div className="relative mx-auto max-w-2xl text-center">
-          <p className="arabic mb-2 text-2xl text-gold-light" dir="rtl">
+        <div className="relative mx-auto max-w-3xl text-center animate-fade-up">
+          <p className="arabic mb-4 text-2xl text-gold-mid sm:text-3xl" dir="rtl">
             اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ
           </p>
-          <p className="mb-7 text-xs tracking-widest text-brand-faint/70">
+          <p className="mb-8 text-xs font-medium tracking-widest text-ink-faint uppercase">
             &ldquo;Read in the name of your Lord who created.&rdquo; — Al-Alaq 96:1
           </p>
 
-          <span className="rounded-full border border-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-faint">
+          <span className="inline-block rounded-full border border-brand/10 bg-brand-faint px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brand shadow-sm">
             3 Free Classes
           </span>
 
-          <h1 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+          <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl lg:text-6xl">
             Book Your{" "}
-            <span className="text-gold-light">Free Trial Classes</span>
+            <span className="text-brand">Free Trial Classes</span>
           </h1>
 
-          <p className="mx-auto mt-4 max-w-lg text-brand-faint">
+          <p className="mx-auto mt-6 max-w-xl text-lg text-ink-muted">
             Pick a date and time below. Your first 3 classes with{" "}
-            <strong className="text-white">Hafiza Sania</strong> are completely
-            free — no credit card, no commitment.
+            <strong className="text-ink">Hafiza Sania</strong> are completely free — no credit card, no commitment.
           </p>
 
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-1.5 text-sm text-brand-faint">
-            <span className="text-gold-light">★★★★★</span>
-            <span className="font-semibold text-white">5.0</span>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-sm text-ink-muted">
+            <span className="text-gold-light text-lg">★★★★★</span>
+            <span className="font-bold text-ink">5.0</span>
             <span>· Trusted by 500+ students in 20+ countries</span>
           </div>
 
-          {/* Tutor badge */}
-          <div className="mx-auto mt-6 flex max-w-xs items-center gap-3 rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-left backdrop-blur-sm">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gold-mid text-sm font-extrabold text-white">
+          {/* Premium Tutor Badge */}
+          <div className="mx-auto mt-8 flex max-w-sm items-center gap-4 rounded-2xl border border-border/60 bg-white p-4 text-left shadow-lg shadow-brand/5">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand text-lg font-extrabold text-white shadow-inner">
               HS
             </div>
             <div>
-              <p className="text-sm font-semibold text-white">Hafiza Sania</p>
-              <p className="text-xs text-brand-faint">MPhil · Certified Hafiza · 10+ yrs</p>
+              <p className="text-base font-bold text-ink">Hafiza Sania</p>
+              <p className="text-xs font-medium text-ink-muted">MPhil · Certified Hafiza · 10+ yrs</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Calendar section ──────────────────────────────────────────────── */}
-      <section
-        className="bg-surface-2 px-4 py-14"
-        aria-labelledby="book-section-heading"
-      >
+      {/* ── CALENDAR & WHAT HAPPENS SECTION ─────────────────────────────── */}
+      <section className="relative z-10 bg-surface-2 px-4 py-16 sm:py-24 border-t border-border/50" aria-labelledby="book-section-heading">
+        <div className="mx-auto max-w-6xl grid lg:grid-cols-[1fr_400px] gap-12 lg:gap-8 items-start">
+          
+          <h2 id="book-section-heading" className="sr-only">Book your free trial</h2>
+
+          {/* Left: Cal.com embed */}
+          <div className="order-2 lg:order-1 flex flex-col">
+            <div className="mb-6 text-center lg:text-left">
+              <h3 className="text-2xl font-bold text-ink">Choose Your Time</h3>
+              <p className="mt-2 text-sm text-ink-muted">
+                Times shown in your local timezone · Sessions run securely on Zoom
+              </p>
+            </div>
+            
+            <div className="overflow-hidden rounded-3xl border border-border/60 bg-white shadow-xl shadow-brand/5 animate-fade-up delay-200">
+              <CalEmbed calLink={calLink} />
+            </div>
+          </div>
+
+          {/* Right: What Happens Context */}
+          <div className="order-1 lg:order-2 space-y-8 animate-fade-up">
+            <div className="rounded-3xl border border-border/60 bg-white p-8 shadow-lg shadow-brand/5">
+              <h3 className="mb-6 text-xl font-bold text-ink">
+                What Happens in Your Free Trial?
+              </h3>
+              <div className="space-y-6">
+                {WHAT_HAPPENS.map(({ icon, text }, idx) => (
+                  <div key={idx} className="flex items-start gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-faint">
+                      {icon}
+                    </div>
+                    <p className="mt-1 text-sm leading-relaxed text-ink-muted">{text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── TRUST SIGNALS ─────────────────────────────────────────────────── */}
+      <section className="bg-surface px-4 py-16 sm:py-24" aria-label="Booking assurances">
         <div className="mx-auto max-w-5xl">
-          <h2 id="book-section-heading" className="sr-only">
-            Book your free trial
-          </h2>
-
-          {/* What happens */}
-          <div className="mb-8 rounded-2xl border border-border bg-surface p-6 sm:p-8">
-            <h2 className="mb-5 text-lg font-bold text-ink">
-              What Happens in Your Free Trial?
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {WHAT_HAPPENS.map(({ icon, text }) => (
-                <div key={text} className="flex items-start gap-3">
-                  <span className="mt-0.5 shrink-0 text-xl leading-none">{icon}</span>
-                  <p className="text-sm leading-relaxed text-ink-muted">{text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Section label */}
-          <div className="mb-4 text-center">
-            <span className="rounded-full bg-brand-faint px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand">
-              Choose Your Time
-            </span>
-            <p className="mt-2 text-xs text-ink-muted">
-              Times shown in your local timezone · Sessions run on Zoom
-            </p>
-          </div>
-
-          {/* Cal.com embed */}
-          <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
-            <CalEmbed calLink={calLink} />
-          </div>
-        </div>
-      </section>
-
-      {/* ── Trust signals ─────────────────────────────────────────────────── */}
-      <section className="bg-surface px-4 py-14" aria-label="Booking assurances">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-10 text-center">
-            <h2 className="text-2xl font-bold text-ink">No Surprises. No Pressure.</h2>
-            <p className="mx-auto mt-2 max-w-md text-sm text-ink-muted">
-              The trial exists for you to experience the teaching — nothing more.
+          <div className="mb-12 text-center animate-fade-up">
+            <h2 className="text-3xl font-extrabold text-ink">No Surprises. No Pressure.</h2>
+            <p className="mx-auto mt-4 max-w-md text-base text-ink-muted">
+              The trial exists purely for you to experience the teaching methodology.
             </p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-3">
-            {TRUST_ITEMS.map(({ icon, title, body }) => (
+            {TRUST_ITEMS.map(({ icon, title, body }, idx) => (
               <div
                 key={title}
-                className="flex flex-col items-center rounded-2xl border border-border bg-surface-2 p-7 text-center"
+                className="group flex flex-col items-center rounded-3xl border border-border/50 bg-white p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand/5 animate-fade-up"
+                style={{ animationDelay: `${idx * 150}ms` }}
               >
-                <span className="mb-3 text-3xl" aria-hidden="true">{icon}</span>
-                <h3 className="mb-1.5 text-sm font-semibold text-ink">{title}</h3>
+                <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-surface-2 transition-transform duration-300 group-hover:scale-110">
+                  {icon}
+                </div>
+                <h3 className="mb-2 text-lg font-bold text-ink">{title}</h3>
                 <p className="text-sm leading-relaxed text-ink-muted">{body}</p>
               </div>
             ))}
           </div>
 
-          <p className="mt-10 text-center text-xs text-ink-muted">
+          <p className="mt-16 text-center text-sm text-ink-muted">
             Questions before booking?{" "}
-            <a
-              href="mailto:saniaqueen1212@gmail.com"
-              className="font-medium text-brand hover:underline"
-            >
+            <a href="mailto:saniaqueen1212@gmail.com" className="font-semibold text-brand transition-colors hover:text-brand-mid">
               Email Hafiza Sania
             </a>{" "}
             or{" "}
-            <a
-              href="https://wa.me/923366375012"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-brand hover:underline"
-            >
+            <a href="https://wa.me/923366375012" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand transition-colors hover:text-brand-mid">
               WhatsApp +92 336 6375012
-            </a>
-            .
+            </a>.
           </p>
         </div>
       </section>
-    </>
+    </div>
   );
 }

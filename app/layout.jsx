@@ -86,9 +86,6 @@ export const metadata = {
     canonical: "https://quranacademy.online",
   },
 
-  verification: {
-    google: "add-your-google-verification-token-here",
-  },
 };
 
 /* ── JSON-LD Structured Data ────────────────────────────────────────────── */

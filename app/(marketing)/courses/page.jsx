@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import { BookOpen, Star, PenTool, MessageCircle, Check, Users, Clock, Gift } from "lucide-react";
 
 export const metadata = {
   title: "Online Quran & Arabic Courses | Hafiza Sania",
@@ -25,8 +26,7 @@ const COURSES = [
     title:    "Quran Nazra",
     arabic:   "ناظرة",
     tagline:  "Read the Quran fluently with correct Tajweed",
-    gradient: "gradient-card-green",
-    icon:     "📖",
+    icon:     <BookOpen className="h-7 w-7 text-brand" />,
     audience: "Ages 5+ · Beginners to intermediate",
     duration: "30–45 min / session",
     price:    "$15",
@@ -45,8 +45,7 @@ const COURSES = [
     title:    "Quran Hafiz",
     arabic:   "حفظ",
     tagline:  "Memorise the complete Quran, Juz by Juz",
-    gradient: "gradient-card-gold",
-    icon:     "🌟",
+    icon:     <Star className="h-7 w-7 text-gold-mid" />,
     audience: "Ages 7+ · Fluent Quran readers",
     duration: "45–60 min / session",
     price:    "$20",
@@ -65,8 +64,7 @@ const COURSES = [
     title:    "Arabic Language",
     arabic:   "لغة عربية",
     tagline:  "Master Classical & Modern Standard Arabic",
-    gradient: "gradient-card-teal",
-    icon:     "✍️",
+    icon:     <PenTool className="h-7 w-7 text-brand-mid" />,
     audience: "Ages 10+ · All levels welcome",
     duration: "45 min / session",
     price:    "$18",
@@ -85,8 +83,7 @@ const COURSES = [
     title:    "Arabic Speaking",
     arabic:   "محادثة",
     tagline:  "Speak Arabic confidently in real conversation",
-    gradient: "gradient-card-navy",
-    icon:     "🗣️",
+    icon:     <MessageCircle className="h-7 w-7 text-brand-light" />,
     audience: "Ages 12+ · Basic Arabic readers preferred",
     duration: "45 min / session",
     price:    "$18",
@@ -101,160 +98,159 @@ const COURSES = [
   },
 ];
 
-const FEATURES = [
-  { icon: "🎯", title: "100% Live & 1-on-1",      body: "Every class is a private session. No group classes, no pre-recorded videos."    },
-  { icon: "🌍", title: "Any Timezone Worldwide",  body: "Schedule at your convenience — morning, afternoon, or evening wherever you are."  },
-  { icon: "👩‍🏫", title: "Female Aalima Teacher", body: "Hafiza Sania: MPhil in Islamic Studies, Certified Hafiza, 10+ years experience."  },
-  { icon: "📋", title: "Structured Curriculum",   body: "Clear lesson plans, monthly progress reports, and measurable milestones."         },
-  { icon: "🎁", title: "3 Free Trial Classes",    body: "Try before you commit — no credit card, no contract, no pressure."               },
-  { icon: "📜", title: "Course Certificates",     body: "Official completion certificates issued upon finishing each course."              },
-];
-
 export default function CoursesPage() {
   return (
-    <>
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="gradient-hero pattern-overlay relative overflow-hidden px-4 py-16">
-        <div
-          className="pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-brand-mid/20 blur-3xl"
-          aria-hidden="true"
-        />
-        <div className="relative mx-auto max-w-3xl text-center">
-          <span className="rounded-full border border-gray/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gray-500">
+    <div className="bg-surface">
+      {/* ── PREMIUM LIGHT HERO ──────────────────────────────────────────── */}
+      <section className="relative overflow-hidden px-4 pb-16 pt-24 sm:pt-32">
+        <div className="pointer-events-none absolute -left-20 top-0 h-96 w-96 rounded-full bg-brand-faint/50 blur-3xl" aria-hidden="true" />
+        <div className="pointer-events-none absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-gold-faint/40 blur-3xl" aria-hidden="true" />
+
+        <div className="relative mx-auto max-w-3xl text-center animate-fade-up">
+          <span className="inline-block rounded-full border border-brand/10 bg-brand-faint px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brand shadow-sm">
             Our Courses
           </span>
-          <h1 className="mt-4 text-4xl font-extrabold sm:text-5xl">
+          <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl">
             4 Courses.{" "}
-            <span className="text-gold-light">One Dedicated Teacher.</span>
+            <span className="text-brand">One Dedicated Teacher.</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-black/80">
+          <p className="mx-auto mt-6 max-w-xl text-lg text-ink-muted">
             Live, 1-on-1 Zoom classes with Hafiza Sania — MPhil, Certified Hafiza, 10+ years
             experience. Choose the course that matches your goal.
           </p>
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-1.5 text-sm text-gray-500">
-            <span className="text-gold-light">★★★★★</span>
-            <span className="font-semibold">5.0</span>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-sm text-ink-muted">
+            <span className="text-gold-light text-lg">★★★★★</span>
+            <span className="font-bold text-ink">5.0</span>
             <span>· 500+ students · 20+ countries · First 3 classes free</span>
           </div>
         </div>
       </section>
 
-      {/* ── Course cards ──────────────────────────────────────────────────── */}
-      <section className="bg-surface-2 px-4 py-16" aria-labelledby="courses-heading">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-10 text-center">
-            <span className="section-chip bg-brand-faint text-brand">Choose Your Course</span>
-            <h2 id="courses-heading" className="mt-3 text-3xl font-bold text-ink sm:text-4xl">
+      {/* ── COURSE CARDS (SaaS PRICING STYLE) ───────────────────────────── */}
+      <section className="relative z-10 bg-surface-2 px-4 py-16 sm:py-24 border-t border-border/50" aria-labelledby="courses-heading">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 text-center animate-fade-up">
+            <h2 id="courses-heading" className="text-3xl font-extrabold text-ink sm:text-4xl">
               All Courses Include a Free Trial
             </h2>
-            <p className="mx-auto mt-3 max-w-lg text-ink-muted">
+            <p className="mx-auto mt-4 max-w-xl text-base text-ink-muted">
               Start with 3 free lessons. Experience the teaching style, set your goals, and
               continue only if you love it.
             </p>
           </div>
 
-          <div className="grid gap-7 sm:grid-cols-2 xl:grid-cols-4">
-            {COURSES.map(({ slug, label, title, arabic, tagline, gradient, icon, audience, duration, price, per, outcomes, badge }) => (
-              <article
-                key={slug}
-                className="card-hover flex flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-sm"
-              >
-                <div className={`${gradient} relative flex flex-col items-center px-5 py-7 text-center text-white`}>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:items-center">
+            {COURSES.map(({ slug, label, title, arabic, tagline, icon, audience, duration, price, per, outcomes, badge }, index) => {
+              const isPopular = badge === "Most Popular";
+
+              return (
+                <article
+                  key={slug}
+                  className={`group relative flex flex-col rounded-3xl bg-white p-8 transition-all duration-300 animate-fade-up ${
+                    isPopular 
+                      ? "border-2 border-brand-mid shadow-2xl shadow-brand/10 lg:-translate-y-4 hover:-translate-y-6 z-10" 
+                      : "border border-border/60 shadow-lg hover:-translate-y-2 hover:shadow-xl"
+                  }`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  {/* Badge */}
                   {badge && (
-                    <span className="absolute right-3 top-3 rounded-full border border-white/25 bg-white/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                    <div className={`absolute -top-4 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-bold uppercase tracking-wider shadow-sm ${isPopular ? "bg-brand-mid text-white" : "bg-surface-2 text-ink-muted border border-border"}`}>
                       {badge}
-                    </span>
+                    </div>
                   )}
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 text-3xl shadow-inner backdrop-blur-sm">
-                    {icon}
-                  </div>
-                  <span className="mt-3 text-[10px] font-bold uppercase tracking-[0.15em] text-white/60">
-                    {label}
-                  </span>
-                  <h3 className="mt-1 text-xl font-extrabold">{title}</h3>
-                  <p className="arabic mt-1 text-base text-white/70" dir="rtl">{arabic}</p>
-                  <p className="mt-2 text-xs leading-relaxed text-white/80">{tagline}</p>
-                </div>
 
-                <div className="flex flex-1 flex-col p-5">
-                  <div className="mb-3 space-y-1 text-xs text-ink-muted">
-                    <div>👥 {audience}</div>
-                    <div>⏱ {duration}</div>
+                  {/* Header */}
+                  <div className="text-center mt-4">
+                    <div className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl mb-4 ${isPopular ? "bg-brand-faint" : "bg-surface-2"}`}>
+                      {icon}
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand">{label}</span>
+                    <h3 className="mt-1 text-2xl font-extrabold text-ink">{title}</h3>
+                    <p className="arabic mt-1 text-lg text-ink-muted" dir="rtl">{arabic}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-ink-muted min-h-[40px]">{tagline}</p>
                   </div>
 
-                  <ul className="mb-5 space-y-2">
+                  {/* Details */}
+                  <div className="my-6 rounded-2xl bg-surface-2 p-4 text-xs font-medium text-ink-muted space-y-2">
+                    <div className="flex items-center gap-2"><Users className="h-4 w-4 text-brand-mid" /> {audience}</div>
+                    <div className="flex items-center gap-2"><Clock className="h-4 w-4 text-brand-mid" /> {duration}</div>
+                  </div>
+
+                  {/* Price */}
+                  <div className="mb-6 flex items-baseline justify-center gap-1">
+                    <span className="text-4xl font-extrabold text-ink">{price}</span>
+                    <span className="text-sm font-medium text-ink-muted">{per}</span>
+                  </div>
+
+                  {/* Outcomes */}
+                  <ul className="mb-8 flex-1 space-y-4">
                     {outcomes.map((o) => (
-                      <li key={o} className="flex items-start gap-2 text-xs text-ink-muted">
-                        <span className="mt-0.5 shrink-0 text-brand">✓</span>
+                      <li key={o} className="flex items-start gap-3 text-sm text-ink-muted">
+                        <Check className="h-5 w-5 shrink-0 text-brand-mid" />
                         <span>{o}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <div className="mt-auto border-t border-border pt-4">
-                    <div className="mb-4 flex items-baseline gap-1">
-                      <span className="text-2xl font-extrabold text-ink">{price}</span>
-                      <span className="text-xs text-ink-muted">{per}</span>
-                    </div>
-                    <Button href="/book" variant="primary" size="sm" className="w-full justify-center">
+                  {/* Actions */}
+                  <div className="mt-auto space-y-3 pt-6 border-t border-border/50">
+                    <Button href="/book" variant={isPopular ? "primary" : "outline"} className="w-full justify-center">
                       Start Free Trial
                     </Button>
                     <Link
                       href={`/courses/${slug}`}
-                      className="mt-2 block text-center text-xs text-brand hover:underline"
+                      className="block text-center text-xs font-semibold text-ink-muted transition-colors hover:text-brand"
                     >
                       View full curriculum →
                     </Link>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
 
-          {/* ── Tutor strip ───────────────────────────────────────────────────── */}
-      <section className="border-y border-border bg-surface-2 px-4 py-12">
-        <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center sm:flex-row sm:text-left">
-          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-brand text-2xl font-extrabold text-white shadow-lg">
+      {/* ── TUTOR STRIP ───────────────────────────────────────────────────── */}
+      <section className="border-y border-border/50 bg-white px-4 py-12">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 text-center sm:flex-row sm:text-left">
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-brand text-2xl font-extrabold text-white shadow-lg shadow-brand/20">
             HS
           </div>
           <div className="flex-1">
-            <p className="text-xs font-semibold uppercase tracking-widest text-brand">Your Teacher</p>
-            <h3 className="mt-0.5 text-xl font-bold text-ink">Hafiza Sania</h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              MPhil in Islamic &amp; Arabic Studies (16-year degree) · Certified Hafiza ·
-              10+ Years Experience · 500+ Students Worldwide
+            <p className="text-xs font-bold uppercase tracking-widest text-brand">Your Teacher</p>
+            <h3 className="mt-1 text-2xl font-bold text-ink">Hafiza Sania</h3>
+            <p className="mt-2 text-sm text-ink-muted">
+              MPhil in Islamic &amp; Arabic Studies (16-year degree) · Certified Hafiza · 10+ Years Experience · 500+ Students Worldwide
             </p>
           </div>
-          <Button href="/about" variant="secondary" size="sm" className="shrink-0">
+          <Button href="/about" variant="secondary" size="md" className="shrink-0">
             Meet Hafiza Sania
           </Button>
         </div>
       </section>
 
-      {/* ── Final CTA ─────────────────────────────────────────────────────── */}
-      <section className="gradient-hero pattern-overlay relative overflow-hidden px-4 py-16 text-white">
-        <div className="relative mx-auto max-w-xl text-center">
-          <p className="arabic mb-3 text-2xl text-gold-light" dir="rtl">
-            اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ
+      {/* ── FINAL CTA (LIGHT & PREMIUM) ───────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-brand-faint/30 px-4 py-20 sm:py-24">
+        <div className="relative mx-auto max-w-2xl text-center animate-fade-up">
+          <h2 className="text-3xl font-extrabold text-ink sm:text-4xl">Not Sure Which Course to Pick?</h2>
+          <p className="mx-auto mt-4 max-w-md text-base text-ink-muted">
+            Book your free trial and Hafiza Sania will personally assess your level and recommend the perfect path for you or your child.
           </p>
-          <p className="mb-6 text-xs italic text-gray-500">
-            &ldquo;Read in the name of your Lord who created.&rdquo; — Al-Alaq 96:1
-          </p>
-          <h2 className="text-2xl font-bold sm:text-3xl text-gray-700">Not Sure Which Course to Pick?</h2>
-          <p className="mx-auto mt-3 max-w-md text-sm text-gray-500">
-            Book your free trial and Hafiza Sania will assess your level and recommend the
-            perfect course for you or your child.
-          </p>
-          <Button href="/book" variant="gold" size="lg" className="mt-6">
-            🎁 Claim 3 Free Classes
-          </Button>
-          <p className="mt-3 text-xs text-gray-500">
-            ✓ No credit card &nbsp;·&nbsp; ✓ Ages 5–50 &nbsp;·&nbsp; ✓ Female teacher
-          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button href="/book" variant="gold" size="xl" className="shadow-lg shadow-gold-mid/20 hover:scale-105 transition-transform w-full sm:w-auto justify-center inline-flex items-center gap-2">
+              <Gift className="h-4 w-4" /> Claim 3 Free Classes
+            </Button>
+          </div>
+          <div className="mt-6 flex flex-wrap justify-center gap-4 text-xs font-medium text-ink-muted">
+            <span className="flex items-center gap-1"><Check className="h-4 w-4 text-brand" /> No credit card</span>
+            <span className="flex items-center gap-1"><Check className="h-4 w-4 text-brand" /> Ages 5–50</span>
+            <span className="flex items-center gap-1"><Check className="h-4 w-4 text-brand" /> Female teacher</span>
+          </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
+
