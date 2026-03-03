@@ -1,26 +1,327 @@
-@import "tailwindcss";
+@import "tailwindcss/preflight";
+@import "tailwindcss/theme";
+@import "tailwindcss/utilities";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Explicit source paths — avoids Windows/Turbopack nul-path bug in auto-detection */
+@source "../app/**/*.{js,jsx,ts,tsx}";
+@source "../components/**/*.{js,jsx,ts,tsx}";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TAILWIND v4 THEME — Quran Academy Design System
+   Poppins (Latin) + Amiri (Arabic) · Islamic Green + Warm Gold palette
+   ═══════════════════════════════════════════════════════════════════════════ */
+@theme {
+  /* ── Typography ─────────────────────────────────────────────────────── */
+  --font-sans:   var(--font-poppins);
+  --font-arabic: var(--font-amiri);
+
+  /* ── Brand Greens (Islamic emerald scale) ───────────────────────────── */
+  --color-brand:        #064e3b;   /* deepest emerald — dark sections    */
+  --color-brand-mid:    #059669;   /* vivid emerald   — CTAs, links       */
+  --color-brand-light:  #10b981;   /* emerald 500     — hover states      */
+  --color-brand-faint:  #d1fae5;   /* pale mint       — tinted bg         */
+  --color-brand-50:     #ecfdf5;   /* near-white mint — lightest tint     */
+
+  /* ── Gold / Amber (premium Islamic accent) ──────────────────────────── */
+  --color-gold-deep:    #78350f;   /* darkest amber   — deep emphasis     */
+  --color-gold:         #b45309;   /* rich gold       — bold text accent  */
+  --color-gold-mid:     #d97706;   /* amber 600       — primary CTA gold  */
+  --color-gold-light:   #f59e0b;   /* amber 400       — star ratings      */
+  --color-gold-faint:   #fffbeb;   /* warm cream      — gold section bg   */
+  --color-gold-shine:   #fde68a;   /* pale gold       — hero sparkle      */
+
+  /* ── Warm Surfaces (slightly ivory — Islamic manuscript feel) ───────── */
+  --color-surface:      #ffffff;
+  --color-surface-2:    #f9fafb;
+  --color-surface-warm: #fdf6e3;   /* warm ivory      — alt section bg   */
+  --color-surface-dark: #0d1f17;   /* very dark green — footer           */
+  --color-hero-warm:    #fef3c7;   /* warm yellow-50  — icon tints        */
+
+  /* ── Borders ────────────────────────────────────────────────────────── */
+  --color-border:       #e5e7eb;
+  --color-border-light: #f3f4f6;
+  --color-border-warm:  #fde68a;   /* gold border for featured cards     */
+
+  /* ── Text ───────────────────────────────────────────────────────────── */
+  --color-ink:          #111827;   /* near-black      — main body        */
+  --color-ink-muted:    #4b5563;   /* medium gray     — secondary text   */
+  --color-ink-faint:    #9ca3af;   /* light gray      — placeholders     */
+
+  /* ── Semantic ───────────────────────────────────────────────────────── */
+  --color-success:      #16a34a;
+  --color-error:        #dc2626;
+  --color-warning:      #d97706;
+  --color-info:         #0369a1;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE RESET & DEFAULTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins, "Poppins", system-ui, sans-serif);
+  background-color: #ffffff;
+  color: #111827;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CUSTOM SCROLLBAR
+   ═══════════════════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #059669; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #064e3b; }
+* { scrollbar-width: thin; scrollbar-color: #059669 #f1f5f9; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TEXT SELECTION
+   ═══════════════════════════════════════════════════════════════════════════ */
+::selection { background: #d1fae5; color: #064e3b; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FOCUS RING (accessibility)
+   ═══════════════════════════════════════════════════════════════════════════ */
+:focus-visible {
+  outline: 2px solid #059669;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ARABIC TEXT UTILITY
+   Usage: <p className="arabic">بِسْمِ اللَّهِ</p>
+   ═══════════════════════════════════════════════════════════════════════════ */
+.arabic {
+  font-family: var(--font-amiri, "Times New Roman", Georgia, serif);
+  direction: rtl;
+  line-height: 2.6;
+  letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GRADIENT UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+.gradient-hero {
+  background: linear-gradient(145deg, #032d20 0%, #064e3b 35%, #065f46 65%, #0a7355 100%);
+}
+.gradient-brand {
+  background: linear-gradient(135deg, #064e3b 0%, #059669 100%);
+}
+.gradient-gold {
+  background: linear-gradient(135deg, #78350f 0%, #d97706 100%);
+}
+.gradient-brand-gold {
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #b45309 100%);
+}
+.gradient-warm {
+  background: linear-gradient(135deg, #fdf6e3 0%, #fffbeb 100%);
+}
+.gradient-card-green {
+  background: linear-gradient(145deg, #064e3b 0%, #059669 100%);
+}
+.gradient-card-gold {
+  background: linear-gradient(145deg, #78350f 0%, #d97706 100%);
+}
+.gradient-card-teal {
+  background: linear-gradient(145deg, #0f766e 0%, #14b8a6 100%);
+}
+.gradient-card-navy {
+  background: linear-gradient(145deg, #1e3a5f 0%, #2563eb 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLASS MORPHISM
+   ═══════════════════════════════════════════════════════════════════════════ */
+.glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.glass-dark {
+  background: rgba(6, 78, 59, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CARD HOVER LIFT
+   ═══════════════════════════════════════════════════════════════════════════ */
+.card-hover {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -12px rgba(6, 78, 59, 0.18);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ISLAMIC GEOMETRIC PATTERN OVERLAY
+   A subtle repeating star polygon for hero / section bg overlays
+   ═══════════════════════════════════════════════════════════════════════════ */
+.pattern-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1'%3E%3Cpolygon points='40,4 46,28 70,28 51,43 58,68 40,54 22,68 29,43 10,28 34,28'/%3E%3Cpolygon points='40,14 44,26 57,26 47,34 51,47 40,39 29,47 33,34 23,26 36,26'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+.pattern-overlay-gold {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='rgba(217,119,6,0.08)' stroke-width='1'%3E%3Cpolygon points='40,4 46,28 70,28 51,43 58,68 40,54 22,68 29,43 10,28 34,28'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0);     }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.55); }
+  70%  { transform: scale(1);    box-shadow: 0 0 0 12px rgba(5, 150, 105, 0);  }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);   }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-fade-up       { animation: fade-up     0.65s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade-in       { animation: fade-in     0.5s  ease both; }
+.animate-slide-right   { animation: slide-right 0.65s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-float         { animation: float       4s    ease-in-out infinite; }
+.animate-pulse-ring    { animation: pulse-ring  2s    ease-in-out infinite; }
+.animate-marquee       { animation: marquee     30s   linear infinite; }
+
+/* Animation delay utilities */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SHIMMER (loading skeletons / badge shine)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PROSE / RICH TEXT DEFAULTS (for dynamic content areas)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.rich-text h2 { font-size: 1.5rem;  font-weight: 700; color: #111827; margin-bottom: 0.75rem; }
+.rich-text h3 { font-size: 1.25rem; font-weight: 600; color: #111827; margin-bottom: 0.5rem;  }
+.rich-text p  { color: #4b5563; line-height: 1.75; margin-bottom: 1rem; }
+.rich-text ul { list-style: disc; padding-left: 1.5rem; color: #4b5563; }
+.rich-text li { margin-bottom: 0.4rem; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTION LABELLING CHIP
+   ═══════════════════════════════════════════════════════════════════════════ */
+.section-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.875rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SALE BANNER PUSH — ensures page content is not hidden behind sticky banner
+   ═══════════════════════════════════════════════════════════════════════════ */
+.has-sale-banner {
+  padding-bottom: 60px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FORM FIELD BASE
+   ═══════════════════════════════════════════════════════════════════════════ */
+.field-base {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  color: #111827;
+  font-family: var(--font-poppins, system-ui, sans-serif);
+  font-size: 0.875rem;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  outline: none;
+  line-height: 1.5;
+}
+.field-base::placeholder { color: #9ca3af; }
+.field-base:focus {
+  border-color: #059669;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
+}
+.field-base:invalid:not(:placeholder-shown) {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BADGE UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+.badge-green { background:#d1fae5; color:#064e3b; padding:0.15rem 0.6rem; border-radius:999px; font-size:0.7rem; font-weight:600; }
+.badge-gold  { background:#fffbeb; color:#92400e; padding:0.15rem 0.6rem; border-radius:999px; font-size:0.7rem; font-weight:600; }
+.badge-blue  { background:#dbeafe; color:#1e40af; padding:0.15rem 0.6rem; border-radius:999px; font-size:0.7rem; font-weight:600; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DIVIDER WITH TEXT
+   ═══════════════════════════════════════════════════════════════════════════ */
+.divider-text {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+.divider-text::before,
+.divider-text::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRINT STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media print {
+  header, footer, .no-print { display: none !important; }
+  body { color: #000; background: #fff; }
 }
